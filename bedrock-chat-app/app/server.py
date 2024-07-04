@@ -30,6 +30,7 @@ def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
         credentials.username, os.getenv('BEDROCK_CHAT_USERNAME', 'bedrock'))
     correct_password = secrets.compare_digest(
         credentials.password, os.getenv('BEDROCK_CHAT_PASSWORD', 'bedrock'))
+    print(f"The secret value is: {os.getenv('BEDROCK_CHAT_PASSWORD')}")
     if not (correct_username and correct_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
